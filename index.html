@@ -144,7 +144,7 @@
     </main>
 
     <!-- side bar cart -->
-    <div class="max-w-96 w-full absolute top-0 right-0">
+    <div class="max-w-80 w-full absolute top-0 right-0">
       <div>
         <!-- side bar header start -->
         <div class="flex justify-between items-center gap-3 py-3 px-4 bg-white">
@@ -179,36 +179,64 @@
 
         <!-- side bar content start -->
         <div class="flex flex-col gap-3 bg-primary w-full py-3 px-4">
-          <div class="p-2 relative border border-secondary">
-            <div class="flex gap-3">
-              <figure class="w-2/5 h-full">
+          <div class="p-2 relative border border-secondary rounded-md">
+            <div class="flex gap-3 h-full">
+              <figure class="w-[35%] h-full">
                 <img
-                  class="w-full h-full"
+                  class="w-full h-full object-cover"
                   src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWWKKZmTXCluh1n4AyqvBI566A3ij_M2ENhZAFTYWucC9gVQ9-"
                   alt=""
                 />
               </figure>
 
-              <div class="w-3/5">
+              <div class="w-[65%] space-y-1 text-secondary">
                 <div class="">
                   <h2>Chicken Masala</h2>
                   <p><span>269</span>$/each</p>
                 </div>
 
-                <div class="flex">
+                <div class="flex items-center">
                   <button
-                    class="py-2 px-2.5 flex items-center justify-center bg-secondary text-black text-lg"
+                    class="py-1 rounded-md px-2.5 flex items-center justify-center bg-secondary text-black text-lg"
                   >
                     <span>-</span>
                   </button>
-                  <span class="px-4 py-1 bg-white inline-block">1</span>
+
+                  <span class="px-3 !py-0 bg-white inline-block text-black"
+                    >1</span
+                  >
+
                   <button
-                    class="py-2 px-2.5 flex items-center justify-center bg-secondary text-black text-lg"
+                    class="py-1 rounded-md px-2.5 flex items-center justify-center bg-secondary text-black text-lg"
                   >
                     <span>+</span>
                   </button>
                 </div>
               </div>
+
+              <button
+                class="w-5 h-5 rounded-md flex items-center justify-center bg-white text-primary absolute -top-1 -right-1"
+              >
+                <span
+                  ><svg
+                    stroke="currentColor"
+                    fill="currentColor"
+                    stroke-width="0"
+                    viewBox="0 0 24 24"
+                    height="1em"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path fill="none" d="M0 0h24v24H0z"></path>
+                    <path
+                      d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"
+                    ></path>
+                  </svg>
+                </span>
+              </button>
+              <strong class="absolute bottom-1 right-1 text-white">
+                <span>100</span>$
+              </strong>
             </div>
           </div>
         </div>
