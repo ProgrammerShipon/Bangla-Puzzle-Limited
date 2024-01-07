@@ -3,35 +3,41 @@ const addToCartOpen = document.getElementById("addToCartOpen");
 const addToCartClose = document.getElementById("addToCartClose");
 const addToCartSideBar = document.getElementById("addToCartSideBar");
 
+// add to cart elements
+const ATCSideBarContent = document.getElementById("ATCSideBarContent");
+const ATCItemsShowNumber =
+  document.getElementsByClassName("ATCItemsShowNumber");
+const showTotalPrice = document.getElementById("showTotalPrice");
+
+// show products
+const productCounter = document.getElementById("productCounter");
+const productCart = document.getElementById("product-cart");
+
 // add to cart sidebar
 addToCartOpen.addEventListener("click", () => addToCartDower("open"));
 addToCartClose.addEventListener("click", () => addToCartDower("close"));
+
+// InitialState
+let addToCart = [];
+
+// ================= Functionality Start  ==================
+
 // add to cart function
 function addToCartDower(state) {
   if (state === "open") {
-    // console.log("open");
     addToCartSideBar.classList.add("addToCartOpen");
     addToCartSideBar.classList.remove("addToCartClose");
   } else {
-    // console.log("close");
     addToCartSideBar.classList.remove("addToCartOpen");
     addToCartSideBar.classList.add("addToCartClose");
   }
 }
 
-// InitialState
-const addToCart = [];
-
-// show products
-const productCounter = document.getElementById("productCounter");
-const productCart = document.getElementById("product-cart");
+// show main products
 function productShow(products) {
-  // console.log("products", products);
-
   if (products?.length) {
     productCounter.innerHTML = "";
     for (const product of products) {
-      // console.log("product", product);
       const productMarkUp = `
         <div class="product-cart">
           <figure>
@@ -74,18 +80,17 @@ function productShow(products) {
 
       productCounter.innerHTML += productMarkUp;
     }
-    // productCounter.appendChild(productCounter);
+  } else {
+    productCounter.innerHTML = `<p class="text-secondary mt-10 px-3">
+      No Product Here...
+    </p>`;
   }
-  // console.log("productsMarkUp ", productsMarkUp);
 }
 
 // add to Cart
 function addToCartHandle(id) {
-  console.log("this", this);
-  console.log("id", id);
   const product = productsObject.find((item) => item?.id === id);
   if (product && id) {
-    // console.log("product , id", product);
     addToCart.push({
       id,
       image: product?.image,
@@ -94,24 +99,14 @@ function addToCartHandle(id) {
       Piece: 1,
     });
   }
-  console.log("addToCart", addToCart);
-  productShow(productsObject);
-  showSidebarContent(addToCart);
+  reCallFc();
 }
 
-productShow(productsObject);
-
-const addToCartSideBarContent = document.getElementById(
-  "addToCartSideBarContent"
-);
-
+// show add to cart products
 function showSidebarContent(products) {
-  // console.log("products", products);
-
   if (products?.length) {
-    addToCartSideBarContent.innerHTML = "";
+    ATCSideBarContent.innerHTML = "";
     for (const product of products) {
-      // console.log("product", product);
       const productMarkUp = `
       <div class="p-2 relative border border-secondary rounded-md">
         <div class="flex gap-3 h-full">
@@ -131,6 +126,7 @@ function showSidebarContent(products) {
 
                 <div class="flex items-center">
                   <button
+                  onclick="ATCChange(${product?.id}, -1)"
                     class="py-1 rounded-md px-2.5 flex items-center justify-center bg-secondary text-black text-lg"
                   >
                     <span> - </span>
@@ -141,6 +137,8 @@ function showSidebarContent(products) {
                   >
 
                   <button
+                  
+                  onclick="ATCChange(${product?.id},1)"
                     class="py-1 rounded-md px-2.5 flex items-center justify-center bg-secondary text-black text-lg"
                   >
                     <span>+</span>
@@ -150,6 +148,7 @@ function showSidebarContent(products) {
 
               <!-- Delete Button -->
               <button
+              onclick="addToCartDelete(${product?.id})"
                 class="w-5 h-5 rounded-md flex items-center justify-center bg-white text-primary absolute -top-1 -right-1"
               >
                 <span>
@@ -176,9 +175,48 @@ function showSidebarContent(products) {
             </div>
             `;
 
-      addToCartSideBarContent.innerHTML += productMarkUp;
+      ATCSideBarContent.innerHTML += productMarkUp;
     }
+  } else {
+    ATCSideBarContent.innerHTML = `<p class="text-secondary mt-10 px-3">
+      You have not selected any products yet
+    </p>`;
   }
 }
 
-showSidebarContent(addToCart);
+// delete add to cart
+const addToCartDelete = (id) => {
+  const addToCartRemove = addToCart.filter((item) => item?.id !== id);
+  addToCart = addToCartRemove;
+  reCallFc();
+};
+
+//  cart item increment or decrement
+function ATCChange(id, value) {
+  const updateData = addToCart.map((item) =>
+    item?.id === id ? { ...item, Piece: item?.Piece + value } : item
+  );
+  addToCart = updateData;
+  reCallFc();
+}
+
+// re-call function
+function reCallFc() {
+  // show product function call
+  productShow(productsObject);
+  showSidebarContent(addToCart);
+
+  // show add item
+  for (const idx in ATCItemsShowNumber) {
+    ATCItemsShowNumber[idx].textContent = addToCart.length;
+  }
+
+  // calculate total price
+  const totalPrice = addToCart.reduce(
+    (prev, item) => item?.Piece * item?.price + prev,
+    0
+  );
+  showTotalPrice.innerText = totalPrice;
+}
+
+reCallFc();

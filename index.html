@@ -51,14 +51,14 @@
           <div class="flex items-center justify-start gap-4">
             <!-- add to Cart Button -->
             <button id="addToCartOpen" class="relative">
-              <span>
+              <span class="">
                 <svg
                   stroke="currentColor"
                   fill="currentColor"
                   stroke-width="0"
                   viewBox="0 0 448 512"
-                  height="1em"
-                  width="1em"
+                  height="1.5rem"
+                  width="1.5rem"
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
@@ -66,13 +66,18 @@
                   ></path>
                 </svg>
               </span>
-              <strong
-                class="bg-primary w-3 h-3 flex item-center justify-center absolute -top-2 -right-2"
-                ><span>0</span>
-              </strong>
+              <p
+                class="bg-primary p-1 rounded-md flex items-center justify-center absolute -top-2 -right-2"
+              >
+                <span class="ATCItemsShowNumber text-white leading-none text-sm"
+                  >0</span
+                >
+              </p>
             </button>
 
-            <button class="btn-primary">Order Now</button>
+            <button class="btn-primary px-9 uppercase text-base">
+              Order Now
+            </button>
           </div>
         </nav>
       </div>
@@ -98,6 +103,7 @@
         </div>
       </section>
 
+      <!-- Products section -->
       <section>
         <div class="section-container">
           <!-- filter div -->
@@ -111,40 +117,12 @@
             </select>
           </div>
 
-          <!-- items div -->
+          <!-- Products div -->
           <div
             id="productCounter"
             class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 items-start"
           >
             <!-- product item -->
-            <!-- <div id="product-cart" class="product-cart">
-              <span
-                class="inline-block px-3 py-0 text-white bg-primary rounded-2xl absolute -top-1 -left-3 transform -rotate-45"
-                >New</span
-              >
-              <figure>
-                <img
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWWKKZmTXCluh1n4AyqvBI566A3ij_M2ENhZAFTYWucC9gVQ9-"
-                  alt=""
-                />
-              </figure>
-              <div>
-                <div>
-                  <h1 class="text-lg font-medium leading-none">Chicken</h1>
-                  <p>69$/each</p>
-                </div>
-
-                <p>
-                  Chicken Fajitas served with rice and beans tortillas,
-                  guacamole, salsa & sour cream chicken Fajitas served
-                </p>
-
-                <div class="flex flex-col gap-3">
-                  <button class="btn-primary">Add to Order</button>
-                  <button class="btn-secondary">Add to Order</button>
-                </div>
-              </div>
-            </div> -->
           </div>
         </div>
       </section>
@@ -172,7 +150,7 @@
               </svg>
             </span>
 
-            <span>1</span>
+            <span class="ATCItemsShowNumber">0</span>
             <span>item</span>
           </div>
 
@@ -187,10 +165,13 @@
 
         <!-- side bar content start -->
         <div
-          id="addToCartSideBarContent"
+          id="ATCSideBarContent"
           class="flex flex-col gap-3 w-full py-3 px-4"
         >
-          <div class="p-2 relative border border-secondary rounded-md">
+          <p class="text-secondary mt-10 px-3">
+            You have not selected any products yet
+          </p>
+          <!-- <div class="p-2 relative border border-secondary rounded-md">
             <div class="flex gap-3 h-full">
               <figure class="w-[35%] h-full">
                 <img
@@ -225,7 +206,7 @@
                 </div>
               </div>
 
-              <!-- Delete Button -->
+              
               <button
                 class="w-5 h-5 rounded-md flex items-center justify-center bg-white text-primary absolute -top-1 -right-1"
               >
@@ -250,7 +231,7 @@
                 <span>100</span>$
               </strong>
             </div>
-          </div>
+          </div> -->
         </div>
         <!-- side bar content end -->
       </div>
@@ -262,7 +243,7 @@
         <button
           class="block w-full text-center p-1 rounded-md text-primary hover:bg-primary hover:text-white"
         >
-          Place Order <span>0</span> $
+          Place Order <span id="showTotalPrice">0</span> $
         </button>
       </div>
       <!-- side bar footer end -->
