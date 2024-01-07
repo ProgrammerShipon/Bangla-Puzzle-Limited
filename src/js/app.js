@@ -194,7 +194,11 @@ const addToCartDelete = (id) => {
 //  cart item increment or decrement
 function ATCChange(id, value) {
   const updateData = addToCart.map((item) =>
-    item?.id === id ? { ...item, Piece: item?.Piece + value } : item
+    item?.id === id
+      ? item?.Piece === 1 && value < 0
+        ? item
+        : { ...item, Piece: item?.Piece + value }
+      : item
   );
   addToCart = updateData;
   reCallFc();
